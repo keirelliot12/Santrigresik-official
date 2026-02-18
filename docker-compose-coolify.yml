@@ -1,0 +1,64 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - APP_NAME=SantriGresik
+      - APP_KEY=base64:gAt3Jv+znan6ZDMM0DjfJoruVmUT9TKWWTBNPcliV90=
+      - APP_DEBUG=false
+      - APP_URL=https://santrigresik.me
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=santrigresik_db
+      - DB_USERNAME=santrigresik
+      - DB_PASSWORD=santrigresik123
+      - AUTORUN_ENABLED=true
+      - CACHE_STORE=file
+      - SESSION_DRIVER=file
+      - QUEUE_CONNECTION=sync
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/up"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.santrigresik.rule=Host(`santrigresik.me`)"
+      - "traefik.http.routers.santrigresik.entrypoints=https"
+      - "traefik.http.routers.santrigresik.tls.certresolver=letsencrypt"
+      - "traefik.http.services.santrigresik.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.santrigresik-headers.headers.customFrameOptionsValue=SAMEORIGIN"
+      - "traefik.http.middlewares.santrigresik-headers.headers.contentSecurityPolicy=default-src 'self'"
+      - "traefik.http.middlewares.santrigresik-headers.headers.referrerPolicy=strict-origin-when-cross-origin"
+      - "traefik.http.routers.santrigresik.middlewares=santrigresik-headers"
+      - "coolify.managed=true"
+  
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_DATABASE=santrigresik_db
+      - MYSQL_USER=santrigresik
+      - MYSQL_PASSWORD=santrigresik123
+      - MYSQL_ROOT_PASSWORD=root_password_secure_123
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    labels:
+      - "coolify.managed=true"
+
+volumes:
+  mysql_data:
+    driver: local
