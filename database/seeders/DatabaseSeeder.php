@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             FrontendSeeder::class,
+            TeamMembersTableSeeder::class,
+            TestimonialsTableSeeder::class,
         ]);
     }
 }

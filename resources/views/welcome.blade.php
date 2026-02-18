@@ -225,7 +225,7 @@
               <h4>{{ $product->name }}</h4>
               <p>{{ $product->description }}</p>
               <div class="product-meta">
-                <span class="product-price">{{ $product->price > 0 ? 'Mulai Rp ' . number_format($product->price, 0, ',', '.') : 'Hubungi Kami' }}</span>
+                <span class="product-price">{{ $product->price }}</span>
               </div>
               <a
                 href="https://wa.me/6281234567890?text={{ rawurlencode($product->whatsapp_message) }}"

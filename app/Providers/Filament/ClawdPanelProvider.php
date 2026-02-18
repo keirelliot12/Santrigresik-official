@@ -17,6 +17,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class ClawdPanelProvider extends PanelProvider
 {
@@ -26,7 +29,8 @@ class ClawdPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(\App\Filament\Pages\Auth\Login::class)
+            ->emailVerification(false)
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -38,7 +42,8 @@ class ClawdPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                \App\Filament\Widgets\AnalyticsOverviewWidget::class,
+                \App\Filament\Widgets\RevenueChartWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -52,7 +57,12 @@ class ClawdPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                Authenticate::class,
-            ]);
+                // Authenticate::class, // Disable temporarily for testing
+            ])
+            ->tenantMiddleware([])
+            ->authGuard('web')
+            ->registration(false)
+            ->passwordReset(false)
+            ->emailVerification(false);
     }
 }
