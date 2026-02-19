@@ -15,7 +15,8 @@ services:
       - DB_DATABASE=santrigresik_db
       - DB_USERNAME=santrigresik
       - DB_PASSWORD=santrigresik123
-      - AUTORUN_ENABLED=true
+      - AUTORUN_ENABLED=false
+      - AUTORUN_LARAVEL_MIGRATIONS=false
       - CACHE_STORE=file
       - SESSION_DRIVER=file
       - QUEUE_CONNECTION=sync
@@ -23,22 +24,25 @@ services:
       mysql:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:80/up"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/up"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.santrigresik.rule=Host(`santrigresik.me`)"
-      - "traefik.http.routers.santrigresik.entrypoints=https"
-      - "traefik.http.routers.santrigresik.tls.certresolver=letsencrypt"
-      - "traefik.http.services.santrigresik.loadbalancer.server.port=80"
+      - "traefik.http.routers.santrigresik.rule=Host(`santrigresik.me`) || Host(`admin.santrigresik.me`)"
+      - "traefik.http.routers.santrigresik.entrypoints=http"
+      - "traefik.http.services.santrigresik.loadbalancer.server.port=8080"
       - "traefik.http.middlewares.santrigresik-headers.headers.customFrameOptionsValue=SAMEORIGIN"
       - "traefik.http.middlewares.santrigresik-headers.headers.contentSecurityPolicy=default-src 'self'"
       - "traefik.http.middlewares.santrigresik-headers.headers.referrerPolicy=strict-origin-when-cross-origin"
       - "traefik.http.routers.santrigresik.middlewares=santrigresik-headers"
+      - "traefik.docker.network=coolify"
       - "coolify.managed=true"
+    networks:
+      - coolify
+      - default
   
   mysql:
     image: mysql:8.0
@@ -50,6 +54,9 @@ services:
       - MYSQL_ROOT_PASSWORD=root_password_secure_123
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - coolify
+      - default
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
       interval: 10s
@@ -58,6 +65,12 @@ services:
       start_period: 30s
     labels:
       - "coolify.managed=true"
+
+networks:
+  coolify:
+    external: true
+  default:
+    driver: bridge
 
 volumes:
   mysql_data:
