@@ -1,4 +1,4 @@
-# Force rebuild - v20250219-0415
+# Force rebuild - v20250219-0430
 ARG BASE_IMAGE=serversideup/php:8.3-fpm-nginx
 FROM ${BASE_IMAGE}
 
@@ -20,8 +20,11 @@ RUN touch /var/www/html/database/database.sqlite \
 ENV CACHE_DRIVER=array
 ENV SESSION_DRIVER=file
 
-# Install composer
-RUN composer install --no-interaction --optimize-autoloader --no-dev
+# Install composer WITHOUT scripts first
+RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts
+
+# Generate autoload
+RUN composer dump-autoload --optimize
 
 # Fix permissions (Tetap root saat build untuk chmod)
 RUN mkdir -p /var/www/html/storage/logs \
