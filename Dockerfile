@@ -11,6 +11,10 @@ RUN apt-get update && apt-get install -y \
 # Copy project
 COPY --chown=www-data:www-data . /var/www/html
 
+# Create empty SQLite database (required for composer package:discover)
+RUN touch /var/www/html/database/database.sqlite \
+    && chown www-data:www-data /var/www/html/database/database.sqlite
+
 # Install composer
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
