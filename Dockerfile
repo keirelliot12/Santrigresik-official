@@ -1,12 +1,13 @@
-FROM serversideup/php:8.3-fpm-nginx
+# Force rebuild - v20250219-0415
+ARG BASE_IMAGE=serversideup/php:8.3-fpm-nginx
+FROM ${BASE_IMAGE}
 
 USER root
 
-# Install dependencies & PHP extensions
+# Install dependencies (intl sudah ada di base image)
 RUN apt-get update && apt-get install -y \
-    git curl libpng-dev libonig-dev libxml2-dev libicu-dev zip unzip \
-    && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-install intl
+    git curl zip unzip \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy project
 COPY --chown=www-data:www-data . /var/www/html
@@ -14,6 +15,10 @@ COPY --chown=www-data:www-data . /var/www/html
 # Create empty SQLite database (required for composer package:discover)
 RUN touch /var/www/html/database/database.sqlite \
     && chown www-data:www-data /var/www/html/database/database.sqlite
+
+# Set cache driver ke array untuk build (tidak butuh DB)
+ENV CACHE_DRIVER=array
+ENV SESSION_DRIVER=file
 
 # Install composer
 RUN composer install --no-interaction --optimize-autoloader --no-dev
