@@ -538,6 +538,73 @@
       <i data-lucide="chevron-up"></i>
     </button>
 
+    <!-- ===== AI CHATBOT WIDGET ===== -->
+    <div id="chatbot-widget" class="chatbot-widget">
+      <!-- Toggle Button -->
+      <button class="chatbot-toggle" id="chatbotToggle" aria-label="Buka chatbot">
+        <span class="chatbot-toggle-icon chatbot-toggle-open"><i data-lucide="message-circle"></i></span>
+        <span class="chatbot-toggle-icon chatbot-toggle-close" style="display:none"><i data-lucide="x"></i></span>
+        <span class="chatbot-badge" id="chatbotBadge">1</span>
+      </button>
+
+      <!-- Chat Window -->
+      <div class="chatbot-window" id="chatbotWindow" aria-hidden="true">
+        <!-- Header -->
+        <div class="chatbot-header">
+          <div class="chatbot-header-info">
+            <div class="chatbot-avatar">
+              <span>☪</span>
+            </div>
+            <div>
+              <div class="chatbot-name">SantriBot</div>
+              <div class="chatbot-status"><span class="chatbot-status-dot"></span> Online</div>
+            </div>
+          </div>
+          <button class="chatbot-header-close" id="chatbotClose" aria-label="Tutup chatbot">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <!-- Messages -->
+        <div class="chatbot-messages" id="chatbotMessages">
+          <div class="chatbot-msg chatbot-msg-bot">
+            <div class="chatbot-msg-bubble">
+              Halo! 👋 Saya <strong>SantriBot</strong>, asisten virtual <strong>SantriGresik.id</strong>.<br><br>
+              Saya bisa membantu Anda tentang layanan, portofolio, dan proses kerja kami. Silakan ajukan pertanyaan Anda!
+            </div>
+            <div class="chatbot-msg-time">Sekarang</div>
+          </div>
+          <div class="chatbot-quick-replies" id="chatbotQuickReplies">
+            <button class="chatbot-quick-btn" data-msg="Apa saja layanan yang tersedia?">Layanan kami</button>
+            <button class="chatbot-quick-btn" data-msg="Berapa harga pembuatan website?">Harga website</button>
+            <button class="chatbot-quick-btn" data-msg="Bagaimana proses kerja kalian?">Proses kerja</button>
+            <button class="chatbot-quick-btn" data-msg="Lihat portfolio kalian">Portfolio</button>
+          </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chatbot-input-area">
+          <div class="chatbot-input-row">
+            <input
+              type="text"
+              id="chatbotInput"
+              class="chatbot-input"
+              placeholder="Ketik pesan Anda..."
+              autocomplete="off"
+              maxlength="500"
+            />
+            <button class="chatbot-send-btn" id="chatbotSendBtn" aria-label="Kirim pesan">
+              <i data-lucide="send"></i>
+            </button>
+          </div>
+          <div class="chatbot-footer-note">
+            Powered by <strong>SantriGresik.id</strong> &mdash;
+            <a href="https://wa.me/6281234567890?text=Halo%20SantriGresik.id%2C%20saya%20ingin%20konsultasi" target="_blank" rel="noopener">Chat WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="{{ asset('js/script.js') }}"></script>
   </body>
 </html>
