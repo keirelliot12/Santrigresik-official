@@ -1,0 +1,18 @@
+{
+  "resources/css/app.css": {
+    "file": "css/app-DFAmMTXr.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/filament/admin/theme.css": {
+    "file": "css/theme-DXnAnFbD.css",
+    "src": "resources/css/filament/admin/theme.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "js/app-CxpHSmGg.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
