@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             FrontendSeeder::class,
             TeamMembersTableSeeder::class,
             TestimonialsTableSeeder::class,
+            ChatbotFaqSeeder::class,
         ]);
     }
 }
