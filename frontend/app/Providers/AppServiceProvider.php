@@ -21,13 +21,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Reset cached roles and permissions
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+        // Reset cached roles and permissions only in production console environment
+        if (app()->runningInConsole() && app()->environment('production')) {
+            app(PermissionRegistrar::class)->forgetCachedPermissions();
+        }
 
         // Implicitly grant "Super Admin" role all permissions
         // This works in the app by using gate-related functions like auth()->user->can() and @can
         Gate::before(function ($user, $ability) {
-            if ($user->hasRole('super_admin')) {
+            if ($user && $user->hasRole('super_admin')) {
                 return true;
             }
         });
