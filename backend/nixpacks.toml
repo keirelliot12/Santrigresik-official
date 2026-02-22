@@ -1,6 +1,6 @@
 [phases.setup]
-nixPkgs = ["php83", "php83Packages.composer", "nodejs"]
+nixPkgs = ["php83", "php83Packages.composer", "nodejs", "nginx"]
 [phases.build]
-cmds = [ "composer install --no-dev --optimize-autoloader", "npm install && npm run build" ]
+cmds = [ "composer install --no-dev --optimize-autoloader", "npm install && npm run build", "mkdir -p /assets && cp nginx.template.conf /assets/nginx.template.conf" ]
 [start]
-cmd = "mkdir -p storage/framework/views storage/framework/cache/data storage/framework/sessions && chmod -R 775 storage bootstrap/cache && php artisan optimize:clear && php artisan serve --host=0.0.0.0 --port=8000"
+cmd = "mkdir -p storage/framework/views storage/framework/cache/data storage/framework/sessions && chmod -R 775 storage bootstrap/cache && php artisan optimize:clear && node /assets/scripts/prestart.mjs /assets/nginx.template.conf /etc/nginx.conf && (php-fpm -y /assets/php-fpm.conf & nginx -c /etc/nginx.conf)"
