@@ -3,7 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SantriGresik.id - Glassmorphism Design Draft</title>
+    <title>Santri Gresik Digital Agency — Partner Digitalisasi Pesantren & Bisnis Muslim</title>
+    <meta name="description" content="Santri Gresik Digital Agency adalah partner digitalisasi pesantren dan bisnis Muslim di Indonesia. Kami membangun ekosistem digital yang barokah.">
+    <meta name="keywords" content="digitalisasi pesantren, agensi digital pesantren, website pesantren, manajemen santri, bisnis Muslim">
+    <meta name="author" content="Santri Gresik Digital Agency">
+    <link rel="canonical" href="https://santrigresik.id">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Santri Gresik Digital Agency — Partner Digitalisasi Pesantren & Bisnis Muslim">
+    <meta property="og:description" content="Membangun ekosistem digital yang barokah. Dari digitalisasi pesantren hingga solusi kustom untuk bisnis Anda.">
+    <meta property="og:url" content="https://santrigresik.id">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Santri Gresik Digital Agency">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:image" content="https://santrigresik.id/og-image.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@santrigresikid">
+    <meta name="twitter:title" content="Santri Gresik Digital Agency — Partner Digitalisasi Pesantren & Bisnis Muslim">
+    <meta name="twitter:description" content="Membangun ekosistem digital yang barokah. Dari digitalisasi pesantren hingga solusi kustom untuk bisnis Anda.">
+    <meta name="twitter:image" content="https://santrigresik.id/og-image.png">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://santrigresik.id/#organization",
+        "name": "Santri Gresik Digital Agency",
+        "url": "https://santrigresik.id",
+        "logo": "https://santrigresik.id/icon.jpg",
+        "description": "Partner digitalisasi pesantren dan bisnis Muslim di Indonesia",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Gresik",
+            "addressRegion": "Jawa Timur",
+            "addressCountry": "ID"
+        },
+        "sameAs": [
+            "https://www.instagram.com/santrigresikid",
+            "https://github.com/santrigresikid",
+            "https://santri360.com"
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Digitalisasi Pesantren",
+        "provider": {
+            "@id": "https://santrigresik.id/#organization"
+        },
+        "name": "Manajemen Santri 360",
+        "description": "Sistem manajemen pesantren modern untuk data santri, absensi, keuangan, raport, dan tahfidz",
+        "url": "https://santri360.com",
+        "areaServed": {
+            "@type": "Country",
+            "name": "Indonesia"
+        }
+    }
+    </script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -86,17 +149,17 @@
                 <span class="text-emerald-400">Santri</span>Gresik<span class="text-emerald-400">.id</span>
             </div>
             <div class="hidden md:flex space-x-8 text-sm font-medium opacity-80">
-                <a href="#" class="hover:text-emerald-400 transition">Beranda</a>
-                <a href="#" class="hover:text-emerald-400 transition">Layanan</a>
-                <a href="#" class="hover:text-emerald-400 transition">Portfolio</a>
-                <a href="#" class="hover:text-emerald-400 transition">Kontak</a>
+                <a href="#hero" class="hover:text-emerald-400 transition">Beranda</a>
+                <a href="#layanan" class="hover:text-emerald-400 transition">Layanan</a>
+                <a href="#portfolio" class="hover:text-emerald-400 transition">Portfolio</a>
+                <a href="https://wa.me/6285172200840" class="hover:text-emerald-400 transition">Kontak</a>
             </div>
             <a href="https://wa.me/6285172200840" class="btn-glass px-5 py-2 rounded-full text-sm font-bold">Konsultasi</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-40 pb-20 px-6">
+    <section id="hero" class="pt-40 pb-20 px-6">
         <div class="container mx-auto text-center max-w-4xl">
             <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
                 Modern Tech,<br><span class="text-gradient">Santri Spirit.</span>
@@ -116,7 +179,7 @@
     </section>
 
     <!-- Services -->
-    <section class="py-20 px-6">
+    <section id="layanan" class="py-20 px-6">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Service 1 -->
@@ -134,6 +197,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-3">Digitalisasi Pesantren</h3>
                     <p class="text-slate-400 text-sm leading-relaxed">Sistem terintegrasi untuk administrasi, ustadz, dan santri dalam satu platform modern.</p>
+                    <a href="https://santri360.com" class="inline-block mt-4 text-emerald-400 text-sm font-bold hover:underline" target="_blank">Lihat Santri360 →</a>
                 </div>
                 <!-- Service 3 -->
                 <div class="glass-card p-8">
@@ -148,7 +212,7 @@
     </section>
 
     <!-- Portfolio Preview -->
-    <section class="py-20 px-6">
+    <section id="portfolio" class="py-20 px-6">
         <div class="container mx-auto">
             <div class="flex justify-between items-end mb-12">
                 <div>
